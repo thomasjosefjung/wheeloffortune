@@ -312,7 +312,7 @@ function resize() {
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";
 
-    let canvasWidth = size > 1200 ? size / 2 : size; 
+    let canvasWidth = size > 1000 ? size / 2 : size; 
 
     canvas.width = canvasWidth; 
     canvas.height = canvasWidth; 
