@@ -312,10 +312,10 @@ function resize() {
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";
 
-    let canvasWidth = size > 1200 ? size / 2 : smallerSide; 
+    let canvasWidth = size > 1200 ? size / 2 : size; 
 
-    canvas.width = size; 
-    canvas.height = size; 
+    canvas.width = canvasWidth; 
+    canvas.height = canvasWidth; 
 
     paintWheel(); 
 }
