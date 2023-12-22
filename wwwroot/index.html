@@ -11,34 +11,58 @@
 
 </head>
 
-<body style="text-align: center;align-content: center; align-items: center">
+<body style="text-align: center;align-content: center; align-items: center" onresize="resize()">
+    <div class="content">
+        <h1>who's next?</h1>
+        <h2>turn the wheel of fortune!</h2>
+    </div>
+    <div id="canvas_container">
+        <canvas id="canvas" style="background-color:white;z-index: -1;margin: 0px; border: 0px;padding: 0px;"
+            onClick="run()"></canvas>
+    </div>
+    <div style="position: fixed; bottom: 3px; right: 3px;text-align: right;">
+        <a onclick="showNamesEditor()">Edit names...</a>
+    </div>
+    <p style="width: 100%;" id="guy">Smalltalk!</p>
 
-    <div class="container">
+    <div id="nameseditor" class="editor" style="visibility: hidden;">
+        <h2>Edit names</h2>
+        <div id="nameslist" style="position: relative"></div>
+        <div style="position: absolute;top: 6px;right: 6px;">
+            <span onclick="nameseditorclose()" style="font-size: 24pt;font-weight: bold;color: white;">X</span>
+        </div>
+        <div>
+            <input id="inputnewname" type="text" style="vertical-align: middle;"
+                onkeydown="if (event.keyCode == 13) addName()" />
+            <a onclick="addName()">
+                <img src="./static/add.svg" style="height: 20px; vertical-align: middle;" />
+            </a>
+        </div>
+
+        <div style="position: absolute;bottom: 10px; right:10px; ">
+            <button type="button" class="a-button a-button--primary -without-icon" onclick="nameseditorclose()">
+                <div class="a-button__label">Close</div>
+            </button>
+        </div>
+    </div>    
+
+
+    <!-- <div class="container">
         <div class="content">
             <h1>who's next?</h1>
             <h2>turn the wheel of fortune!</h2>
         </div>
 
-        <div class="container">
-            <div class="card is-centered" style="resize: vertical;overflow: auto;min-height: 40vh;" id="resizable">
-                <div class="card-content is-centered" id="canvas_container">
-                    <canvas id="canvas"
-                        style="background-color:white;z-index: -1;margin: 0px; border: 0px;padding: 0px;"
-                        onClick="run()"></canvas>
-                </div>
-            </div>
-            <button type="button" class="a-button a-button--primary -without-icon m-2" onClick="run()">
+            <!-- <button type="button" class="a-button a-button--primary -without-icon m-2" onClick="run()">
                 <div class="a-button__label">turn!</div>
             </button>
             <button type="button" class="a-button a-button--primary -without-icon m-2" onClick="showNamesEditor()">
                 <div class="a-button__label">edit&nbsp;names</div>
-            </button>
-        </div>
+            </button> -->
 
+        
 
-        <div style="position: fixed; bottom: 3px; right: 3px;text-align: right;">
-            <a onclick="showNamesEditor()">Edit names...</a>
-        </div>
+    <!-- 
 
         <p style="width: 100%;" id="guy">Smalltalk!</p>
 
@@ -61,9 +85,9 @@
                     <div class="a-button__label">Close</div>
                 </button>
             </div>
-        </div>
+        </div> -->
 
-        <!-- <p id="joke" style="padding: 10pt; "> </p>  -->
+    <!-- <p id="joke" style="padding: 10pt; "> </p>  -->
     </div>
 </body>
 
@@ -71,41 +95,6 @@
 <script src="./script/wheeloffortune.js "></script>
 
 <script>
-    function resize() {
-        let canvasContainer = document.getElementById("canvas_container");
-
-        ccWidth = canvasContainer.parentElement.offsetWidth;
-        ccHeight = canvasContainer.parentElement.offsetHeight;
-
-        p = ccWidth - ccHeight;
-        if (p > 0) {
-            canvasContainer.style.paddingLeft = p / 2 + "px";
-        }
-
-        let smallerSide = Math.min(ccWidth, ccHeight);
-
-        canvasContainer.style.width = smallerSide + "px";
-        canvasContainer.style.height = smallerSide + "px";
-
-        let canvas = document.getElementById("canvas");
-
-        canvas.style.width = smallerSide - 30 + "px";
-        canvas.style.height = smallerSide - 30 + "px";
-
-        canvas.width = smallerSide - 30;
-        canvas.height = smallerSide - 30;
-
-        paintWheel();
-    }
-
-    const resizeObserver = new ResizeObserver(entries => {
-        resize();
-    });
-    resize();
-
-    // showNamesEditor();
-    resizeObserver.observe(document.getElementById("resizable"));
-
 </script>
 
 </html>

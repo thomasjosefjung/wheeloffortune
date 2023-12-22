@@ -1,4 +1,4 @@
-let boschColors = {
+let setOfColors = {
     "red": [234, 0, 22],
     "fuchsia": [185, 2, 118],
     "violet": [80, 35, 127],
@@ -9,10 +9,10 @@ let boschColors = {
     "darkgreen": [0, 98, 73]
 }
 
-let boschColorsArray = new Array(8);
+let setOfColorsArray = new Array(8);
 let i = 0;
-for (const name in boschColors) {
-    boschColorsArray[i++] = name;
+for (const name in setOfColors) {
+    setOfColorsArray[i++] = name;
 }
 let colorIndexCounter = 0;
 
@@ -91,8 +91,8 @@ function step() {
             }
         case (StateEnum.decelerating):
             {
-                if (Math.abs(currentSpeed) > 0.00002) {
-                    currentSpeed /= 1 + delta_t * 2 / 1000;
+                if (Math.abs(currentSpeed) > 0.00005) {
+                    currentSpeed /= 1 + delta_t * 2 / 500;
                 } else {
                     wheelState = StateEnum.resting;
                 }
@@ -156,18 +156,20 @@ function paintWheel() {
         ctx.shadowBlur = 10;
 
         let d = 3000 * Math.abs(currentSpeed);
-        let dx = Math.cos(Math.PI / N) * d;
-        let dy = Math.sin(Math.PI / N) * d;
+        let tmp = Math.PI / N;
+
+        let dx = Math.cos(tmp) * d;
+        let dy = Math.sin(tmp) * d;
         ctx.translate(dx, dy);
 
 
         ctx.beginPath();
         ctx.moveTo(10, 0);
         ctx.lineTo(R, 0);
-        ctx.arc(0, 0, R, 0, 2 * Math.PI / N, false);
+        ctx.arc(0, 0, R, 0, 2 * tmp, false);
 
-        let x = Math.round(Math.cos(2 * Math.PI / N) * 10);
-        let y = Math.round(Math.sin(2 * Math.PI / N) * 10);
+        let x = Math.round(Math.cos(2 * tmp) * 10);
+        let y = Math.round(Math.sin(2 * tmp) * 10);
 
         ctx.lineTo(x, y);
         ctx.arc(0, 0, 10, 2 * Math.PI / N, 0, true);
@@ -175,16 +177,15 @@ function paintWheel() {
 
         ctx.fillStyle = colors[allAttendees.indexOf(currentAttendees[i])];
         ctx.lineWidth = 1;
-        // ctx.stroke();
         ctx.fill();
 
         ctx.shadowBlur = 0;
 
         // rotation = 1 / N * Math.PI * 2;
-        ctx.rotate(Math.PI / N);
+        ctx.rotate(tmp);
 
         ctx.fillStyle = "black";
-        ctx.font = canvas.width/30+"px Arial";
+        ctx.font = canvas.width / 30 + "px Arial";
         ctx.textBaseline = "middle";
         ctx.textAlign = "center"
         ctx.fillStyle = "white";
@@ -263,10 +264,70 @@ function clear() {
 // }
 
 function randColor() {
-    let c = boschColors[boschColorsArray[colorIndexCounter++]];
+    let c = setOfColors[setOfColorsArray[colorIndexCounter++]];
     if (colorIndexCounter >= 8) {
         colorIndexCounter = 0;
     }
 
     return "rgb(" + c[0] + ", " + c[1] + ", " + c[2] + ")";
 }
+
+// function resize() {
+//     let canvasContainer = document.getElementById("canvas_container");
+
+//     ccWidth = canvasContainer.parentElement.offsetWidth;
+//     ccHeight = canvasContainer.parentElement.offsetHeight;
+
+//     p = ccWidth - ccHeight;
+//     if (p > 0) {
+//         canvasContainer.style.paddingLeft = p / 2 + "px";
+//     }
+
+//     let smallerSide = Math.min(ccWidth, ccHeight);
+
+//     canvasContainer.style.width = smallerSide + "px";
+//     canvasContainer.style.height = smallerSide + "px";
+
+//     let canvas = document.getElementById("canvas");
+
+//     canvas.style.width = smallerSide - 30 + "px";
+//     canvas.style.height = smallerSide - 30 + "px";
+
+//     canvas.width = smallerSide - 30;
+//     canvas.height = smallerSide - 30;
+
+//     paintWheel();
+// }
+
+function resize() {
+    let canvasContainer = document.getElementById("canvas_container");
+    let ih = window.innerHeight;
+    let iw = window.innerWidth;
+    let smallerSide = Math.min(innerWidth, innerHeight);
+
+    let canvas = document.getElementById("canvas");
+
+    let size = smallerSide - 200; 
+
+    canvas.style.width = size + "px";
+    canvas.style.height = size + "px";
+
+    let canvasWidth = size > 1200 ? size / 2 : smallerSide; 
+
+    canvas.width = size; 
+    canvas.height = size; 
+
+    paintWheel(); 
+}
+
+resize(); 
+
+// const resizeObserver = new ResizeObserver(entries => {
+//     resize();
+//     paintWheel(); 
+// });
+// resize();
+
+// // showNamesEditor();
+// resizeObserver.observe(document.body);
+
