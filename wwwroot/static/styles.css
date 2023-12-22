@@ -1,0 +1,42 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button {
+    padding: 10px;
+    margin: 1px;
+    background-color: rgb(50,150,200);
+    border-width: 1px;
+    font-size: medium;
+    color: white;
+}
+
+@keyframes example {
+    from {
+        color: black;
+        background-color: white;
+    }
+    to {
+        color: white;
+        background-color: #007bc0;
+    }
+}
+
+#guy {
+    color: white;
+    background: rgb(185, 2, 118);
+}
+
+.editor {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgb(20, 20, 20);
+    border-width: 1px;
+    border-style: solid;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    left: 10%;
+    bottom: 10%;
+    /* box-shadow: 10px 10px 10px rgba(150, 150, 150, 100); */
+}
+
