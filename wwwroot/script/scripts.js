@@ -32,8 +32,17 @@ function showNamesEditor() {
 
     nameslist.innerHTML = innerHTML;
 
-    document.getElementById("nameseditor").style.visibility = "visible";
+    document.getElementById("nameseditor").classList.add("is-active"); 
 }
+
+function nameseditorclose() {
+    document.getElementById("nameseditor").classList.remove("is-active"); 
+
+    // document.getElementById("nameseditor").style.visibility = "hidden";
+    window.localStorage.setItem("allNames", JSON.stringify(allAttendees));
+    resetWheel();
+}
+
 
 function removeName(name) {
     allAttendees = allAttendees.filter(item => item !== name);
@@ -45,12 +54,6 @@ function addName() {
     allAttendees.push(input.value);
     input.value = "";
     queueMicrotask(() => showNamesEditor());
-}
-
-function nameseditorclose() {
-    document.getElementById("nameseditor").style.visibility = "hidden";
-    window.localStorage.setItem("allNames", JSON.stringify(allAttendees));
-    resetWheel();
 }
 
 let remaining = allAttendees.slice();

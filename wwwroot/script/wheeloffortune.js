@@ -128,6 +128,8 @@ function step() {
 paintWheel();
 
 function paintWheel() {
+    let innerRadius = 25; 
+
     let center_x = canvas.width / 2;
     let center_y = canvas.height / 2;
 
@@ -155,7 +157,7 @@ function paintWheel() {
         ctx.shadowColor = 'gray';
         ctx.shadowBlur = 10;
 
-        let d = 3000 * Math.abs(currentSpeed);
+        let d = 1000 * Math.abs(currentSpeed);
         let tmp = Math.PI / N;
 
         let dx = Math.cos(tmp) * d;
@@ -164,15 +166,15 @@ function paintWheel() {
 
 
         ctx.beginPath();
-        ctx.moveTo(10, 0);
+        ctx.moveTo(innerRadius, 0);
         ctx.lineTo(R, 0);
         ctx.arc(0, 0, R, 0, 2 * tmp, false);
 
-        let x = Math.round(Math.cos(2 * tmp) * 10);
-        let y = Math.round(Math.sin(2 * tmp) * 10);
+        let x = Math.round(Math.cos(2 * tmp) * innerRadius);
+        let y = Math.round(Math.sin(2 * tmp) * innerRadius);
 
         ctx.lineTo(x, y);
-        ctx.arc(0, 0, 10, 2 * Math.PI / N, 0, true);
+        ctx.arc(0, 0, innerRadius, 2 * Math.PI / N, 0, true);
         ctx.closePath();
 
         ctx.fillStyle = colors[allAttendees.indexOf(currentAttendees[i])];
@@ -307,7 +309,7 @@ function resize() {
 
     let canvas = document.getElementById("canvas");
 
-    let size = smallerSide - 200; 
+    let size = 0.7*smallerSide; 
 
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";

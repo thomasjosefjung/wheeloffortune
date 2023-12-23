@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="is-clipped">
 
 <head>
     <!-- <link rel="stylesheet" href="./package/dist/frontend-kit.css"> -->
@@ -11,40 +11,61 @@
 
 </head>
 
-<body style="text-align: center;align-content: center; align-items: center" onresize="resize()">
-    <div class="content">
-        <h1>who's next?</h1>
-        <h2>turn the wheel of fortune!</h2>
+<body onresize="resize()" class="pt-2">
+    <!-- <div id="nameseditor" class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <p>Content!</p>
+        </div>
+    </div> -->
+    <div class="columns">
+        <div class="column has-text-centered">
+            <div class="content">
+                <h1>who's next?</h1>
+                <h2>turn the wheel of fortune!</h2>
+            </div>
+        </div>
     </div>
-    <div id="canvas_container">
-        <canvas id="canvas" style="background-color:white;z-index: -1;margin: 0px; border: 0px;padding: 0px;"
-            onClick="run()"></canvas>
-    </div>
-    <div style="position: fixed; bottom: 3px; right: 3px;text-align: right;">
-        <a onclick="showNamesEditor()">Edit names...</a>
-    </div>
-    <p style="width: 100%;" id="guy">Smalltalk!</p>
 
-    <div id="nameseditor" class="editor" style="visibility: hidden;">
-        <h2>Edit names</h2>
-        <div id="nameslist" style="position: relative"></div>
-        <div style="position: absolute;top: 6px;right: 6px;">
-            <span onclick="nameseditorclose()" style="font-size: 24pt;font-weight: bold;color: white;">X</span>
+    <div class="columns is-vcentered">
+        <div class="column has-text-centered is-four-fifths">
+            <div id="canvas_container" class="container">
+                <canvas id="canvas" style="background-color:white;margin: 0px; border: 0px;padding: 0px;"
+                    onClick="run()"></canvas>
+            </div>
         </div>
-        <div>
-            <input id="inputnewname" type="text" style="vertical-align: middle;"
-                onkeydown="if (event.keyCode == 13) addName()" />
-            <a onclick="addName()">
-                <img src="./static/add.svg" style="height: 20px; vertical-align: middle;" />
-            </a>
+        <div class="column has-text-centered">
+            <button onclick="showNamesEditor()">Names...</button>
         </div>
+    </div>
 
-        <div style="position: absolute;bottom: 10px; right:10px; ">
-            <button type="button" class="a-button a-button--primary -without-icon" onclick="nameseditorclose()">
-                <div class="a-button__label">Close</div>
-            </button>
+    <div class="columns is-vcentered">
+        <div class="column has-text-centered">
+            <div class="content">
+                <h1 id="guy" class="is-large">Smalltalk!</h2>
+            </div>
         </div>
-    </div>    
+    </div>
+
+
+    <div id="nameseditor" class="modal">
+        <div class="modal-background" onclick="nameseditorclose()"></div>
+        <div class="modal-close is-large"></div>
+        <div class="modal-content">
+            <div class="box">
+                <div class="content has-text-centered">
+                    <h2>Edit names</h2>
+                    <div id="nameslist"></div>
+                    <div>
+                        <input id="inputnewname" type="text" onkeydown="if (event.keyCode == 13) addName()" />
+                        <a onclick="addName()">
+                            <img src="./static/add.svg" style="height: 20px; vertical-align: middle;" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- <div class="container">
@@ -60,7 +81,7 @@
                 <div class="a-button__label">edit&nbsp;names</div>
             </button> -->
 
-        
+
 
     <!-- 
 
