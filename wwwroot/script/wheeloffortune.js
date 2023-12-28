@@ -195,14 +195,6 @@ function paintWheel() {
         ctx.restore();
     }
 
-    // // paint hole
-    // ctx.restore();
-    // ctx.beginPath();
-    // ctx.arc(0, 0, 10, 0, 2 * Math.PI, false);
-    // ctx.fillStyle = "rgba(255,255,255,255)";
-    // ctx.closePath();
-    // ctx.fill();
-
     // Paint the triangle 
     ctx.restore();
     ctx.beginPath();
@@ -254,16 +246,6 @@ function clear() {
     ctx.restore();
 }
 
-
-// function randColor() {
-//     let h = Math.round(Math.random() * 255);
-//     // let s = Math.round(Math.random() * 100) + "%";
-//     let s = "100%";
-//     let l = "64%";
-
-//     return "hsl(" + h + "," + s + "," + l + ")";
-// }
-
 function randColor() {
     let c = setOfColors[setOfColorsArray[colorIndexCounter++]];
     if (colorIndexCounter >= 8) {
@@ -272,33 +254,6 @@ function randColor() {
 
     return "rgb(" + c[0] + ", " + c[1] + ", " + c[2] + ")";
 }
-
-// function resize() {
-//     let canvasContainer = document.getElementById("canvas_container");
-
-//     ccWidth = canvasContainer.parentElement.offsetWidth;
-//     ccHeight = canvasContainer.parentElement.offsetHeight;
-
-//     p = ccWidth - ccHeight;
-//     if (p > 0) {
-//         canvasContainer.style.paddingLeft = p / 2 + "px";
-//     }
-
-//     let smallerSide = Math.min(ccWidth, ccHeight);
-
-//     canvasContainer.style.width = smallerSide + "px";
-//     canvasContainer.style.height = smallerSide + "px";
-
-//     let canvas = document.getElementById("canvas");
-
-//     canvas.style.width = smallerSide - 30 + "px";
-//     canvas.style.height = smallerSide - 30 + "px";
-
-//     canvas.width = smallerSide - 30;
-//     canvas.height = smallerSide - 30;
-
-//     paintWheel();
-// }
 
 function resize() {
     let canvasContainer = document.getElementById("canvas_container");
@@ -322,13 +277,3 @@ function resize() {
 }
 
 resize(); 
-
-// const resizeObserver = new ResizeObserver(entries => {
-//     resize();
-//     paintWheel(); 
-// });
-// resize();
-
-// // showNamesEditor();
-// resizeObserver.observe(document.body);
-
