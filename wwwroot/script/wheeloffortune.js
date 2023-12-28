@@ -145,10 +145,15 @@ function paintWheel() {
     ctx.rotate(rotationState);
 
     N = currentAttendees.length;
+    let d = 1000 * Math.abs(currentSpeed);
+    let piByN = Math.PI / N;
+    let dx = Math.cos(piByN) * d;
+    let dy = Math.sin(piByN) * d;
+
 
     for (i = 0; i < N; ++i) {
 
-        let rotation = i / N * Math.PI * 2;
+        let rotation = i * piByN * 2;
 
         ctx.save();
         ctx.rotate(rotation);
@@ -157,21 +162,15 @@ function paintWheel() {
         ctx.shadowColor = 'gray';
         ctx.shadowBlur = 10;
 
-        let d = 1000 * Math.abs(currentSpeed);
-        let tmp = Math.PI / N;
-
-        let dx = Math.cos(tmp) * d;
-        let dy = Math.sin(tmp) * d;
         ctx.translate(dx, dy);
-
 
         ctx.beginPath();
         ctx.moveTo(innerRadius, 0);
         ctx.lineTo(R, 0);
-        ctx.arc(0, 0, R, 0, 2 * tmp, false);
+        ctx.arc(0, 0, R, 0, 2 * piByN, false);
 
-        let x = Math.round(Math.cos(2 * tmp) * innerRadius);
-        let y = Math.round(Math.sin(2 * tmp) * innerRadius);
+        let x = Math.round(Math.cos(2 * piByN) * innerRadius);
+        let y = Math.round(Math.sin(2 * piByN) * innerRadius);
 
         ctx.lineTo(x, y);
         ctx.arc(0, 0, innerRadius, 2 * Math.PI / N, 0, true);
@@ -184,7 +183,7 @@ function paintWheel() {
         ctx.shadowBlur = 0;
 
         // rotation = 1 / N * Math.PI * 2;
-        ctx.rotate(tmp);
+        ctx.rotate(piByN);
 
         ctx.fillStyle = "black";
         ctx.font = canvas.width / 30 + "px Arial";
@@ -314,7 +313,7 @@ function resize() {
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";
 
-    let canvasWidth = size > 1000 ? size / 2 : size; 
+    let canvasWidth = size > 500 ? size / 2 : size; 
 
     canvas.width = canvasWidth; 
     canvas.height = canvasWidth; 
