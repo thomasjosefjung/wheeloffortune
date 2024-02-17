@@ -268,7 +268,9 @@ function resize() {
     canvas.style.width = size + "px";
     canvas.style.height = size + "px";
 
-    let canvasWidth = size > 800 ? size / 2 : size; 
+    // let canvasWidth = size > 800 ? size / 2 : size; 
+
+    let canvasWidth = size; 
 
     canvas.width = canvasWidth; 
     canvas.height = canvasWidth; 
